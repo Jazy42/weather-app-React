@@ -5,11 +5,11 @@ export default function Display(props) {
     // const {location , temperature,description,region,country,wind_speed,pressure,precip,humidity,img}=props.weatherData;
     return (
         
-        <div>
+        <div className="container p-5">
               <div className="user-weather">
             <div className="row">
-                <div className="col-md-3 weather-temp">
-                    <h1>{props.weatherData.temperature}<sup>o</sup>C , {props.weatherData.description}</h1>
+                <div className="col-md-3 weather-temp P-3">
+                    <h2>{props.weatherData.temperature}<sup>o</sup>C , {props.weatherData.description}</h2>
                     <h4>{props.weatherData.location}</h4>
                     <p>{props.weatherData.region}, {props.weatherData.country}</p>
                 </div>
@@ -18,7 +18,7 @@ export default function Display(props) {
                     <img className="mainImg" src={props.weatherData.img} alt="weather-img" />
                 </div>
             </div>
-
+                
             <div className="row">
                 <div className="col-md-3 weather-info">
                     <p><b>Wind Speed</b>(km/hr)</p>

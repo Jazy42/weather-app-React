@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
-import Navbar from "./Components/components.weather.jsx"
-import Display from "./Components/navbar.jsx"
+import Display from "./Components/components.weather.jsx"
+import Navbar from "./Components/navbar.jsx"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 
@@ -13,7 +13,18 @@ class App extends React.Component {
         latitude:45,
         longitude:60
       },
-      data:{},
+      data:{
+        location:"",
+        temperature: "",
+        description: "",
+        region: "",
+        country: "",
+        wind_speed: "",
+        pressure: "",
+        precip: "",
+        humidity: "",
+        img: ""
+      },
       inputData: ""
 
 
@@ -32,9 +43,7 @@ class App extends React.Component {
 
         this.setState({coordinates:newcoordinates});
         // Calling the API
-        Axios.get(`http://api.weatherstack.com/current?access_key=065a6db729af52ce22afad7c9a1ba178
-        &query=${this.state.coords.latitude},
-        ${this.state.coords.longitude}`).then(res => {
+        Axios.get(`http://api.weatherstack.com/current?access_key=065a6db729af52ce22afad7c9a1ba178&query=${this.state.coords.latitude},${this.state.coords.longitude}`).then(res => {
             let weatherData= {
               location:res.data.location.class,
               temperature: res.data.current.temperature,
@@ -63,9 +72,7 @@ change = (value) =>{
 changeWeather = (event)=>{
   event.preventDefault();
 //api call
-Axios.get(`http://api.weatherstack.com/current
-?access_key = 065a6db729af52ce22afad7c9a1ba178
-&query = ${this.state.inputData}`).then(res => {
+Axios.get(`http://api.weatherstack.com/current?access_key=065a6db729af52ce22afad7c9a1ba178&query=${this.state.inputData}`).then(res => {
   let weatherData={
     location:res.data.location.class,
     temperature: res.data.current.temperature,
@@ -92,14 +99,14 @@ Axios.get(`http://api.weatherstack.com/current
       <div className="App">
         <div className="container">
           <Navbar changeWeather={this.changeWeather} changeRegion={this.change}/>
-         < Display weatherData = {this.state.data} /> 
+         < Display weatherData={this.state.data} /> 
       
       </div>
       </div>
+      
     );
     
   }
   
 }
-
 export default App;
